@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://sos_user:sos2022@64.225.16.68:3306/sos_db?connection_limit=1"
+}
+
+model Client {
+  id        String      @id @default(uuid())
+  name      String
+  Group     Group[]
+  Ocorrency Ocorrency[]
+  Program   Program[]
+  User      User[]
+}
+
+model Program {
+  id       String @id @default(uuid())
+  name     String
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id])
+  User     User[]
+
+  @@index([clientId], name: "clientId")
+}
+
+model Token {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  token     String
+  valid     Boolean  @default(true)
+  userId    String
+  user      User     @relation(name: "userTokens", fields: [userId], references: [id])
+}
+
+model User {
+  id          String      @id @default(uuid())
+  email       String?     @unique
+  password    String
+  name        String
+  role        Role        @default(USER)
+  tokens      Token[]     @relation(name: "userTokens")
+  groupId     String?
+  clientId    String
+  phone       String      @unique
+  pushToken   String?
+  isActive    Boolean     @default(false)
+  code        String?
+  deviceId    String      @default("novo")
+  addressCep  String?
+  addressRes  Json?
+  addressNum  Int?
+  addressComp String?
+  programId   String?
+  client      Client      @relation(fields: [clientId], references: [id])
+  group       Group?      @relation(fields: [groupId], references: [id])
+  program     Program?    @relation(fields: [programId], references: [id])
+  Ocorrency   Ocorrency[]
+  Step        Step[]
+
+  @@index([clientId], name: "clientId")
+  @@index([groupId], name: "groupId")
+  @@index([programId], name: "programId")
+}
+
+model Ocorrency {
+  id        String   @id @default(uuid())
+  latitude  Float
+  longitude Float
+  date      DateTime @default(now())
+  userId    String
+  status    Status   @default(ABERTO)
+  clientId  String
+  sequence  Int?
+  client    Client   @relation(fields: [clientId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  step      Step[]
+
+  @@index([clientId], name: "clientId")
+  @@index([userId], name: "userId")
+}
+
+model Group {
+  id       String @id @default(uuid())
+  name     String
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id])
+  User     User[]
+
+  @@index([clientId], name: "clientId")
+}
+
+model Step {
+  id          String      @id @default(uuid())
+  status      Step_status
+  ocorrencyId String
+  date        DateTime    @default(now())
+  userId      String?
+  ocorrency   Ocorrency   @relation(fields: [ocorrencyId], references: [id])
+  user        User?       @relation(fields: [userId], references: [id])
+
+  @@index([ocorrencyId], name: "ocorrencyId")
+  @@index([userId], name: "userId")
+}
+
+enum Role {
+  USER
+  ADMIN
+  MONITOR
+  SUPER_MONITOR
+}
+
+enum Status {
+  ABERTO
+  EM_ANDAMENTO
+  FECHADO
+}
+
+enum Step_status {
+  ABERTO
+  EM_ANDAMENTO
+  FECHADO
+}
