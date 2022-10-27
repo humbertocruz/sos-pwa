@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import Auth from './_token'
 
 type Data = {
-  emergency: any
+  ocorrencies: any
 }
 
 export default async function handler(
@@ -19,11 +19,11 @@ export default async function handler(
   //@ts-ignore
   if (user) delete user.password
 
-  const emergency = await prisma?.ocorrency.findMany({
+  const ocorrencies = await prisma?.ocorrency.findMany({
     where: {
-      userId: user?.id
+      clientId: user.clientId
     }
   })
   
-  res.status(200).json({ emergency })
+  res.status(200).json({ ocorrencies })
 }

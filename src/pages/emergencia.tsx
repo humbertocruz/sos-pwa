@@ -4,7 +4,7 @@ import { MdPolicy } from 'react-icons/md'
 import FooterComponent from '../components/layout/footer'
 import LayoutComponent from '../components/layout/main'
 import MenuComponent from '../components/layout/menu'
-import useEmergency from '../hooks/useEmergency'
+import useEmergency from '../hooks/useOcorrency'
 
 const Emergency: NextPage = () => {
 
