@@ -5,13 +5,16 @@ import LayoutComponent from '../components/layout/main'
 import useUser from '../hooks/useUser'
 import MonitorComponent from '../components/monitor'
 
+//@ts-ignore
 const Home: NextPage = () => {
 
   const { data } = useUser()
 
   
 
-  if (!data) return null
+  if (!data) return (
+    null
+  )
 
   if (data.user.role == 'ADMIN') {
     return (
