@@ -9,6 +9,7 @@ const useOcorrency = () => {
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${token}`)
   const fetcher = (url:string) => fetch(url,{
+    method:'GET',
     headers:headers
   }).then((r) => r.json())
 

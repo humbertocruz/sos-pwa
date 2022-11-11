@@ -57,7 +57,7 @@ const Login: NextPage = () => {
           <Icon my={8} fontSize={96} color={'gray.500'} aria-label="Emergência" as={MdPolicy} />
           <Text fontWeight={'bold'} color={'gray.500'} fontSize={'md'}>SOS Cidadão</Text>
         </Center>
-        <Center w={'full'} flexDirection={'column'} bg={'gray.100'} p={4} rounded={'md'} shadow={'md'}>
+        <Center w={'md'} flexDirection={'column'} bg={'gray.100'} p={4} rounded={'md'} shadow={'md'}>
           <Input readOnly={isLoading} type={'email'} value={email} onChange={(e)=>setEmail(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite seu Email" />
           <Input readOnly={isLoading} type={'password'} value={password} onChange={(e)=>setPassword(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite sua Senha" />
           <Button color={'gray.200'} isLoading={isLoading} loadingText={'Carregando...'} onClick={handleLogin} w={'full'} my={2} bg={'gray.500'}>

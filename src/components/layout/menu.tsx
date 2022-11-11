@@ -22,12 +22,6 @@ const MenuComponent = () => {
     }
   }, [error])
     
-  useEffect(() => {
-    if (!token) {
-      router.push('/login')
-    }
-  }, [token])
-
   const goTo = (path: string) => {
     router.push(path)
   }
