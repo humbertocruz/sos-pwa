@@ -110,6 +110,7 @@ enum Role {
   ADMIN
   MONITOR
   SUPER_MONITOR
+  SUPER_ADMIN
 }
 
 enum Status {

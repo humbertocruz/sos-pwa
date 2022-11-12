@@ -11,9 +11,7 @@ import useUser from "../../hooks/useUser"
 const MenuComponent = () => {
   const [token,setToken] = useRecoilState(tokenAtom)
   const router = useRouter()
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef<HTMLButtonElement>(null)
-
+  
   const { data, error} = useUser()
 
   useEffect(() => {
@@ -33,41 +31,12 @@ const MenuComponent = () => {
   return (
     <>
     <HStack w={'full'} justifyContent={'space-between'}>
-      <IconButton ref={btnRef} onClick={onOpen} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdMenu size={32} />} />
+      <IconButton color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdPolicy size={32} />} />
       {token&&<IconButton onClick={()=>goTo('/home')} color={'gray.300'} variant={'ghost'} aria-label="Home" icon={<MdHome size={32} />} />}
-      {token&&<IconButton onClick={()=>goTo('/emergencia')} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdPolicy size={32} />} />}
       {!token?<IconButton onClick={()=>goTo('/login')} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdLogin size={32} />} />:
       <IconButton onClick={logout} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdLogout size={32} />} />}
     </HStack>
-    <Drawer
-    isOpen={isOpen}
-    placement='left'
-    onClose={onClose}
-    finalFocusRef={btnRef}
-  >
-    <DrawerOverlay />
-    <DrawerContent bg={'gray.200'}>
-      <DrawerCloseButton color={'gray.500'} />
-      <DrawerHeader color={'gray.500'}>Admin</DrawerHeader>
-
-      <DrawerBody>
-        <List>
-        <ListItem color={'gray.500'}>
-            <ListIcon as={MdPerson} />
-            Usuários
-          </ListItem>
-          <ListItem color={'gray.500'}>
-            <ListIcon as={MdHome} />
-            Grupos
-          </ListItem>
-        </List>
-      </DrawerBody>
-
-      <DrawerFooter>
-        
-      </DrawerFooter>
-    </DrawerContent>
-  </Drawer>
+    
   </>
   )
 }

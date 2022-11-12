@@ -1,9 +1,10 @@
-import { Button, Container, Text, Box, Center, Flex, HStack, IconButton } from '@chakra-ui/react'
+import { Button, Container, Text, Box, Center, Flex, HStack, IconButton, Grid, GridItem } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import { MdPolicy } from 'react-icons/md'
 import LayoutComponent from '../components/layout/main'
 import useUser from '../hooks/useUser'
 import MonitorComponent from '../components/monitor'
+import LayoutAdminComponent from '../components/layout/admin'
 
 //@ts-ignore
 const Home: NextPage = () => {
@@ -18,11 +19,11 @@ const Home: NextPage = () => {
 
   if (data.user.role == 'ADMIN') {
     return (
-      <LayoutComponent>
-        <Center minH={'100vh'} bg={'gray.300'}>
+      <LayoutAdminComponent leftMenu={true}>
+        <Center flexDirection={'column'} px={2} pt={'10vh'} pb={'5vh'} h={'100vh'} bg={'gray.300'} gap={2}>
           <Text>Admin</Text>
         </Center>
-      </LayoutComponent>
+      </LayoutAdminComponent>
     )
   }
   if (data.user.role == 'MONITOR') {
