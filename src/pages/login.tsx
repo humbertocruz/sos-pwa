@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Container, Text, Box, Center, Flex, HStack, IconButton, Input, useToast, Icon } from '@chakra-ui/react'
+import { Button, Container, Text, Box, Center, Flex, HStack, IconButton, Input, useToast, Icon, VStack } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -51,20 +51,24 @@ const Login: NextPage = () => {
   }
 
   return (
-    <LayoutComponent>
-      <Center flexDirection={'column'} px={2} pt={'10vh'} pb={'5vh'} h={'100vh'} bg={'gray.300'} gap={2}>
-        <Center flexDirection={'column'} m={2} p={8} rounded={'md'}>
-          <Icon my={8} fontSize={96} color={'gray.500'} aria-label="Emergência" as={MdPolicy} />
-          <Text fontWeight={'bold'} color={'gray.500'} fontSize={'md'}>SOS Cidadão</Text>
+    <LayoutComponent header={false} footer={false}>
+      <VStack minW={'xs'} w={'full'} px={2}>
+        <Center p={8}>
+          <VStack>
+            <Icon my={8} fontSize={96} color={'gray.500'} aria-label="Emergência" as={MdPolicy} />
+            <Text fontWeight={'bold'} color={'gray.500'} fontSize={'md'}>SOS Cidadão</Text>
+          </VStack>
         </Center>
-        <Center w={'md'} flexDirection={'column'} bg={'gray.100'} p={4} rounded={'md'} shadow={'md'}>
-          <Input readOnly={isLoading} type={'email'} value={email} onChange={(e)=>setEmail(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite seu Email" />
-          <Input readOnly={isLoading} type={'password'} value={password} onChange={(e)=>setPassword(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite sua Senha" />
-          <Button color={'gray.200'} isLoading={isLoading} loadingText={'Carregando...'} onClick={handleLogin} w={'full'} my={2} bg={'gray.500'}>
-            Entrar
-          </Button>
+        <Center w={'full'} bg={'gray.100'} p={4} rounded={'md'} shadow={'md'}>
+          <VStack w={'full'}>
+            <Input readOnly={isLoading} type={'email'} value={email} onChange={(e)=>setEmail(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite seu Email" />
+            <Input readOnly={isLoading} type={'password'} value={password} onChange={(e)=>setPassword(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite sua Senha" />
+            <Button color={'gray.200'} isLoading={isLoading} loadingText={'Carregando...'} onClick={handleLogin} w={'full'} my={2} bg={'gray.500'}>
+              Entrar
+            </Button>
+          </VStack>
         </Center>
-      </Center>
+      </VStack>
     </LayoutComponent>
   )
 }

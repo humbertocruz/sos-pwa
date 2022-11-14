@@ -10,18 +10,18 @@ const IndexPage = () => {
 
 
   return (
-    <LayoutComponent noHeader={true} noFooter={true}>
-      <Center flexDirection={'column'} px={2} pt={'10vh'} pb={'5vh'} h={'100vh'} bg={'gray.300'} gap={2}>
-        <Box bg={'whiteAlpha.700'} m={2} p={4} w={'md'} rounded={'lg'} shadow={'lg'}>
-          <VStack gap={2}>
-          <Center flexDirection={'column'} m={2} p={8} rounded={'md'}>
-            <Icon my={8} fontSize={96} color={'gray.500'} aria-label="Emergência" as={MdPolicy} />
-            <Text fontWeight={'bold'} color={'gray.500'} fontSize={'md'}>SOS Cidadão</Text>
-          </Center>
-          <Button onClick={()=>router.push('/login')} w={'full'} colorScheme={'blue'}>Entre</Button>
-          </VStack>
-        </Box>
-      </Center>
+    <LayoutComponent header={false} footer={false}>
+      <VStack minW={'xs'} w={'full'} px={2}>
+        <Center w={'full'} minH={'100vh'}>
+          <Box bg={'whiteAlpha.500'} p={2} w={'full'} rounded={'lg'} shadow={'lg'}>
+            <VStack gap={2}>
+              <Icon my={8} fontSize={96} color={'blackAlpha.700'} aria-label="Emergência" as={MdPolicy} />
+              <Text fontWeight={'bold'} color={'gray.500'} fontSize={'md'}>SOS Cidadão</Text>
+              <Button onClick={()=>router.push('/login')} w={'full'} colorScheme={'blackAlpha'}>Entre</Button>
+            </VStack>
+          </Box>
+        </Center>
+      </VStack>
     </LayoutComponent>    
   )
 

@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from './_prisma'
 
 type Data = {
-  clients: any
+  users: any
 }
 
 export default async function handler(
@@ -14,19 +14,11 @@ export default async function handler(
   const { authorization } = headers
   const token = authorization?.split(' ')[1]
 
-  const clients = await prisma.client.findMany({
-    select: {
-      id: true,
-      name: true,
-      _count: {
-        select: {
-          Group: true,
-          Program: true,
-          User: true
-        }
-      }
+  const users = await prisma.user.findMany({
+    where: {
+      role: 'ADMIN'
     }
   })
- 
-  res.status(200).json({ clients })
+    
+  res.status(200).json({ users })
 }

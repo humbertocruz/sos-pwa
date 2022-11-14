@@ -5,6 +5,7 @@ import LayoutComponent from '../components/layout/main'
 import useUser from '../hooks/useUser'
 import MonitorComponent from '../components/monitor'
 import LayoutAdminComponent from '../components/layout/admin'
+import LayoutSuperAdminComponent from '../components/layout/super_admin'
 
 //@ts-ignore
 const Home: NextPage = () => {
@@ -17,13 +18,25 @@ const Home: NextPage = () => {
     null
   )
 
-  if (data.user.role == 'ADMIN') {
+  console.log(data)
+
+  if (data.user.role == 'SUPER_ADMIN') {
     return (
-      <LayoutAdminComponent leftMenu={true}>
+      <LayoutComponent>
         <Center flexDirection={'column'} px={2} pt={'10vh'} pb={'5vh'} h={'100vh'} bg={'gray.300'} gap={2}>
           <Text>Admin</Text>
         </Center>
-      </LayoutAdminComponent>
+      </LayoutComponent>
+    )
+  }
+
+  if (data.user.role == 'ADMIN') {
+    return (
+      <LayoutComponent>
+        <Center flexDirection={'column'} px={2} pt={'10vh'} pb={'5vh'} h={'100vh'} bg={'gray.300'} gap={2}>
+          <Text>Admin</Text>
+        </Center>
+      </LayoutComponent>
     )
   }
   if (data.user.role == 'MONITOR') {

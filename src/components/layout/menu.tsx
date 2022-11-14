@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, HStack, IconButton, Input, List, ListIcon, ListItem, useDisclosure } from "@chakra-ui/react"
+import { Text, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, HStack, IconButton, Input, List, ListIcon, ListItem, useDisclosure } from "@chakra-ui/react"
 import useSWR from "swr"
 import { useRouter } from "next/router"
 import { useEffect, useRef } from "react"
-import { MdHome, MdLogin, MdLogout, MdMenu, MdPerson, MdPolicy } from "react-icons/md"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { MdHome, MdLogin, MdLogout, MdMenu, MdPerson, MdPersonSearch, MdPolicy } from "react-icons/md"
+import { useRecoilState } from "recoil"
 import { tokenAtom } from "../../state/atoms"
 import useUser from "../../hooks/useUser"
 
 const MenuComponent = () => {
   const [token,setToken] = useRecoilState(tokenAtom)
+  const {isOpen, onOpen, onClose} = useDisclosure()
   const router = useRouter()
   
   const { data, error} = useUser()
@@ -29,15 +30,40 @@ const MenuComponent = () => {
   }
 
   return (
-    <>
-    <HStack w={'full'} justifyContent={'space-between'}>
-      <IconButton color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdPolicy size={32} />} />
-      {token&&<IconButton onClick={()=>goTo('/home')} color={'gray.300'} variant={'ghost'} aria-label="Home" icon={<MdHome size={32} />} />}
-      {!token?<IconButton onClick={()=>goTo('/login')} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdLogin size={32} />} />:
-      <IconButton onClick={logout} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdLogout size={32} />} />}
-    </HStack>
-    
-  </>
+    <Center zIndex={2} w={'full'} position={'fixed'} top={0} justifyContent={'flex-start'} h={'10vh'} bg={'gray.500'} shadow={'md'} p={2}>
+      <Drawer isOpen onClose={onClose} isOpen={isOpen} placement={'left'}>
+        <DrawerOverlay />
+        <DrawerContent bg={'gray.600'}>
+          <DrawerCloseButton color={'white'} />
+          <DrawerHeader color={'white'}>Menu</DrawerHeader>
+          <DrawerBody>
+            <List spacing={3} color={'white'}>
+              <ListItem onClick={()=>goTo('/admin/clientes')} cursor={'pointer'}>
+                <ListIcon as={MdPerson} />
+                Clientes
+              </ListItem>
+              <ListItem onClick={()=>goTo('/admin/grupos')} cursor={'pointer'}>
+                <ListIcon as={MdPersonSearch} />
+                Grupos
+              </ListItem>
+              <ListItem onClick={()=>goTo('/admin/programas')} cursor={'pointer'}>
+                <ListIcon as={MdPerson} />
+                Programas
+              </ListItem>
+              <ListItem onClick={()=>goTo('/admin/usuarios')} cursor={'pointer'}>
+                <ListIcon as={MdPerson} />
+                Usuários
+              </ListItem>
+            </List>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+      <HStack w={'full'} justifyContent={'space-between'}>
+        <IconButton onClick={onOpen} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdMenu size={32} />} />
+        <Text color={'gray.100'} fontWeight='bold' fontSize={22}>SOS Cidadão</Text>
+        <IconButton onClick={logout} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdLogout size={32} />} />}
+      </HStack>
+    </Center>
   )
 }
 export default MenuComponent
