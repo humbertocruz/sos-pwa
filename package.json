@@ -10,7 +10,7 @@
     "studio": "npx prisma studio"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.3.7",
+    "@chakra-ui/react": "^2.4.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@prisma/client": "^4.6.1",

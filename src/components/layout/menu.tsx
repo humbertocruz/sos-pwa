@@ -30,7 +30,7 @@ const MenuComponent = () => {
   }
 
   return (
-    <Center zIndex={2} w={'full'} position={'fixed'} top={0} justifyContent={'flex-start'} h={'10vh'} bg={'gray.500'} shadow={'md'} p={2}>
+    <Center zIndex={2} w={'full'} position={'fixed'} top={0} justifyContent={'flex-start'} h={'7vh'} bg={'gray.500'} shadow={'md'} p={2}>
       <Drawer isOpen onClose={onClose} isOpen={isOpen} placement={'left'}>
         <DrawerOverlay />
         <DrawerContent bg={'gray.600'}>
@@ -38,6 +38,10 @@ const MenuComponent = () => {
           <DrawerHeader color={'white'}>Menu</DrawerHeader>
           <DrawerBody>
             <List spacing={3} color={'white'}>
+              <ListItem onClick={()=>goTo('/')} cursor={'pointer'}>
+                <ListIcon as={MdHome} />
+                Home
+              </ListItem>
               <ListItem onClick={()=>goTo('/admin/clientes')} cursor={'pointer'}>
                 <ListIcon as={MdPerson} />
                 Clientes
@@ -59,9 +63,9 @@ const MenuComponent = () => {
         </DrawerContent>
       </Drawer>
       <HStack w={'full'} justifyContent={'space-between'}>
-        <IconButton onClick={onOpen} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdMenu size={32} />} />
-        <Text color={'gray.100'} fontWeight='bold' fontSize={22}>SOS Cidadão</Text>
-        <IconButton onClick={logout} color={'gray.300'} variant={'ghost'} aria-label="Emergência" icon={<MdLogout size={32} />} />}
+        <IconButton onClick={onOpen} colorScheme={'whiteAlpha'} variant={'ghost'} aria-label="Emergência" icon={<MdMenu size={24} />} />
+        <Text color={'whiteAlpha.800'} fontWeight='bold' fontSize={18}>SOS Cidadão</Text>
+        <IconButton onClick={logout} colorScheme={'whiteAlpha'} variant={'ghost'} aria-label="Emergência" icon={<MdLogout size={24} />} />}
       </HStack>
     </Center>
   )

@@ -20,12 +20,6 @@ const Login: NextPage = () => {
   const toast = useToast()
   const { doLogin } = useAuth()
 
-  useEffect(() => {
-    if (token) {
-      router.push('/home')
-    }
-  }, [token])
-
   const handleLogin = async () => {
     setIsLoading(true)
     const secret = await doLogin(email, password)
@@ -34,8 +28,8 @@ const Login: NextPage = () => {
         title: 'Login',
         description: 'Login realizado com sucesso.',
         status: 'success',
-        duration: 3000,
-        isClosable: true,
+        duration: 2000,
+        isClosable: false,
       })
       setToken(secret)
     } else {
@@ -43,8 +37,8 @@ const Login: NextPage = () => {
         title: 'Login',
         description: 'Login falhou, verifique seus dados.',
         status: 'error',
-        duration: 3000,
-        isClosable: true,
+        duration: 2000,
+        isClosable: false,
       })
     }
     setIsLoading(false)
@@ -52,23 +46,23 @@ const Login: NextPage = () => {
 
   return (
     <LayoutComponent header={false} footer={false}>
-      <VStack minW={'xs'} w={'full'} px={2}>
+      <Center flexDir={'column'} h={'100vh'} minW={'xs'} w={'full'} px={2}>
         <Center p={8}>
           <VStack>
-            <Icon my={8} fontSize={96} color={'gray.500'} aria-label="Emergência" as={MdPolicy} />
-            <Text fontWeight={'bold'} color={'gray.500'} fontSize={'md'}>SOS Cidadão</Text>
+            <Icon fontSize={96} color={'blackAlpha.500'} aria-label="Emergência" as={MdPolicy} />
+            <Text fontWeight={'bold'} color={'blackAlpha.500'} fontSize={'md'}>SOS CIDADÃO</Text>
           </VStack>
         </Center>
         <Center w={'full'} bg={'gray.100'} p={4} rounded={'md'} shadow={'md'}>
           <VStack w={'full'}>
             <Input readOnly={isLoading} type={'email'} value={email} onChange={(e)=>setEmail(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite seu Email" />
             <Input readOnly={isLoading} type={'password'} value={password} onChange={(e)=>setPassword(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite sua Senha" />
-            <Button color={'gray.200'} isLoading={isLoading} loadingText={'Carregando...'} onClick={handleLogin} w={'full'} my={2} bg={'gray.500'}>
+            <Button colorScheme={'blackAlpha'} isLoading={isLoading} loadingText={'Carregando...'} onClick={handleLogin} w={'full'} my={2} >
               Entrar
             </Button>
           </VStack>
         </Center>
-      </VStack>
+      </Center>
     </LayoutComponent>
   )
 }

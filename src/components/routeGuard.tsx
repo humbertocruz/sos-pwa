@@ -2,31 +2,41 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { tokenAtom } from '../state/atoms'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import Home from '../pages/login'
+import LayoutComponent from './layout/main'
+import { Box, Center, Icon, Text, VStack } from '@chakra-ui/react'
+import { MdPolicy } from 'react-icons/md'
 
-export { RouteGuard }
-
-function RouteGuard(props:any) {
+const RouteGuard = (props:any) => {
     const { children } = props
-    const router = useRouter()
-    const [token,setToken] = useRecoilState(tokenAtom)
     const [canDisplay, setCanDisplay] = useState(false)
+    const token = useRecoilValue(tokenAtom)
+    const router = useRouter()
 
     useEffect(()=>{
         const url = router.asPath
-        const publicPaths = ['/','/login','/convite']
+        const publicPaths = ['/login','/convite']
         const path = url.split('?')[0]
         const isPublic = publicPaths.includes(path)
         if (!isPublic && !token) {
             setCanDisplay(false)
             router.push('/login')
-            setCanDisplay(true)
+            //setCanDisplay(true)
+        } else if (isPublic && token) {
+            router.push('/')
         } else {
             setCanDisplay(true)
         }
-    },[token])
+    },[token,router])
 
-    return(canDisplay && children)
-    
+    if (canDisplay) {
+        return children
+    } else {
+        return (
+            <LayoutComponent header={false} footer={false} />
+        )
+    }    
 }
+
+export { RouteGuard }

@@ -12,15 +12,33 @@ const usePrograms = () => {
     headers:headers
   }).then((r) => r.json())
 
-  // valida o usuario a cada 10 segundos
-  const { data, error, isValidating, mutate } = useSWR(token?'/api/programs':null, fetcher, {
-    refreshInterval: 0
-  })
+  const GetPrograms = () => {
+    // valida o usuario a cada 10 segundos
+    const { data, error, isValidating, mutate } = useSWR(token?'/api/programs':null, fetcher, {
+      refreshInterval: 0
+    })
+    return {
+      data,
+      error,
+      isValidating,
+      mutate
+    }
+  }
+
+  const CreateProgram = async (name:string) => {
+    const response = await fetch('/api/programs',{
+      method:'POST',
+      headers:headers,
+      body:JSON.stringify({
+        name
+      })
+    }).then((r) => r.json())
+    return response
+  }
+  
   return {
-    data,
-    error,
-    isValidating,
-    mutate
+    GetPrograms,
+    CreateProgram
   }
 }
 export default usePrograms

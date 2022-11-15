@@ -7,22 +7,20 @@ import MonitorComponent from '../../components/monitor'
 import LayoutAdminComponent from '../../components/layout/admin'
 import useClients from '../../hooks/useClients'
 import LayoutSuperAdminComponent from '../../components/layout/super_admin'
+import ModalComponent from '../../components/layout/modal'
 
 //@ts-ignore
 const Home: NextPage = () => {
  
   const { data,error, isValidating, mutate } = useClients()
-  if (!data) return (
-    null
-  )
-
+  
   return (
     <LayoutComponent>
         <VStack minW={'xs'} w={'full'} px={2}>
           <HStack w={'full'} bg={'gray.500'} rounded={'md'} p={2}>
-            <Button leftIcon={<MdPersonAdd />} size={'sm'} colorScheme={'blackAlpha'}>Novo Cliente</Button>
+            <ModalComponent title={'Novo Cliente'} />
           </HStack>
-          {data.clients.map((client:any) => (
+          {data&&data.clients.map((client:any) => (
             <Box key={client.id} bg={'white'} p={2} rounded={'md'} w={'full'}>
                 <HStack>
                   <IconButton size={'sm'} colorScheme={'blue'} aria-label="Editar" icon={<Icon as={MdEdit} />} />
