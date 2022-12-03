@@ -10,7 +10,7 @@ const Auth = () => {
         user: true,
       },
     })
-    return data?.user
+    return data?data.user:null
   }
 
   return {

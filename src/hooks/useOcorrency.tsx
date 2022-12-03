@@ -15,7 +15,7 @@ const useOcorrency = () => {
 
   // valida o usuario a cada 10 segundos
   const { data, error, isValidating, mutate } = useSWR(token?'/api/ocorrency':null, fetcher, {
-    refreshInterval: 30000
+    refreshInterval: 10000
   })
   return {
     data,

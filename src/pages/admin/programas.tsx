@@ -36,6 +36,12 @@ const ProgramasPage: NextPage = () => {
     setName(program.name)
     onOpenEdit()
   }
+
+  // Inicia o modal de deletar
+  const startOnOpenDelete = (program:any) => {
+    setId(program.id)
+    onOpenDelete()
+  }
   
   // Adiciona um novo programa
   const onAdd = async () => {
@@ -52,7 +58,6 @@ const ProgramasPage: NextPage = () => {
 
   // Deleta um programa
   const onDelete = async (programId:string) => {
-    console.log(programId)
     await DeleteProgram(programId)
     mutate()
     onCloseDelete()
@@ -93,7 +98,7 @@ const ProgramasPage: NextPage = () => {
   return (
     <LayoutComponent>
       <VStack minW={'xs'} w={'full'} px={2}>
-        
+      <DeleteComponent id={id} title={'Você tem certeza ?'} isOpen={isOpenDelete} onOpen={onOpenDelete} onClose={onCloseDelete} onDelete={onDelete} onCancel={onCancel} />
         <HStack w={'full'} bg={'gray.500'} rounded={'md'} p={2}>
           <ModalComponent title={'Novo Programa'} isOpen={isOpenAdd} onOpen={()=>startOnOpenAdd()} onClose={onCloseAdd} onAdd={onAdd} onCancel={onCancel} >
             <Input value={name} onChange={(e)=>setName(e.currentTarget.value)} variant={'flushed'} placeholder={'Nome do Programa'} />

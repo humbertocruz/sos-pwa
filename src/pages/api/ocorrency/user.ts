@@ -5,8 +5,7 @@ import Auth from '../_token'
 type Data = {
   success:boolean,
   error:string,
-  ocorrencies?: any,
-  ocorrency?: any,
+  ocorrencies: any
 }
 
 export default async function handler(
@@ -37,12 +36,13 @@ export default async function handler(
 
   switch (method) {
     case 'GET':
-      const ocorrencies = await prisma?.ocorrency.findMany({
+      const ocorrencies = await prisma?.ocorrency.findFirst({
         where: {
-          clientId: user?.clientId
-        },
-        orderBy:{
-          date: 'desc'
+          clientId: user?.clientId,
+          userId: user?.id,
+          status: {
+            not: 'FECHADO'
+          }
         },
         select:{
           id:true,
@@ -61,29 +61,12 @@ export default async function handler(
       
       res.status(200).json({ ocorrencies,success:true,error:'' })
       break
-    case 'POST':
-      const { latitude, longitude } = req.body
-      const ocorrency = await prisma?.ocorrency.create({
-        data:{
-          latitude,
-          longitude,
-          user:{
-            connect:{ 
-              id: user?.id
-            }
-          },
-          client:{
-            connect:{
-              id: user?.clientId
-            }
-          }
-        }
-      })
-      res.status(200).json({ ocorrency,success:true,error:'' })
+
     default:
       res.status(430).send({
         success:false,
-        error:'Method invalid!'
+        error:'Method invalid!',
+        ocorrencies:[]
       })
       break
   }

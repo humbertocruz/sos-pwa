@@ -2,8 +2,8 @@ import { Text, Box, Center, SimpleGrid, Badge, VStack } from '@chakra-ui/react'
 import LayoutComponent from '../components/layout/main'
 import dayjs from 'dayjs'
 
-const OcorrencyComponent = (props:any) => {
-  const { ocorrencies } = props
+const UserOcorrencyComponent = (props:any) => {
+  const { ocorrency } = props
   return (
     <LayoutComponent>
       <VStack minH={'100vh'} bg={'gray.300'}>
@@ -13,11 +13,11 @@ const OcorrencyComponent = (props:any) => {
         <SimpleGrid columns={2} gap={2}>
           <Center shadow={'md'} flexDirection={'column'} gap={2} rounded={'md'} p={2} bg={'gray.100'}>
             <Text fontWeight={'bold'} color={'gray.500'} textAlign={'center'}>Situação</Text>
-            <Badge p={2} colorScheme={'yellow'}>{ocorrencies.ocorrencies.status}</Badge>
+            <Badge p={2} colorScheme={'yellow'}>{ocorrency.ocorrencies.status}</Badge>
           </Center>
           <Center shadow={'md'} flexDirection={'column'} gap={2} rounded={'md'} p={2} bg={'gray.100'}>
             <Text fontWeight={'bold'} color={'gray.500'} textAlign={'center'}>Horário</Text>
-            <Badge p={2} colorScheme={'green'}>{dayjs(ocorrencies.ocorrencies.date).format('HH:mm')}</Badge>
+            <Badge p={2} colorScheme={'green'}>{dayjs(ocorrency.ocorrencies.date).format('HH:mm')}</Badge>
           </Center>
         </SimpleGrid>
       </Box>
@@ -26,4 +26,4 @@ const OcorrencyComponent = (props:any) => {
     </LayoutComponent>
   )
 }
-export default OcorrencyComponent
+export default UserOcorrencyComponent

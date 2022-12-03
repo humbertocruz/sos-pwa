@@ -6,20 +6,23 @@ import useUser from '../hooks/useUser'
 import MonitorComponent from '../components/monitor'
 import LayoutAdminComponent from '../components/layout/admin'
 import LayoutSuperAdminComponent from '../components/layout/super_admin'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { tokenAtom } from '../state/atoms'
+import UserComponent from '../components/user'
 
 //@ts-ignore
 const Home: NextPage = () => {
 
   const { data } = useUser()
-  const token = useRecoilValue(tokenAtom)
+  const [token,setToken] = useRecoilState(tokenAtom)
 
   if (!data) return (
     null
   )
 
-  if (data.user.role == 'SUPER_ADMIN') {
+  if (!data.user) setToken(null)
+
+  if (data.user?.role == 'SUPER_ADMIN') {
     return (
       <LayoutComponent>
         <Center flexDirection={'column'} px={2} pt={'10vh'} h={'100vh'} bg={'gray.300'} gap={2}>
@@ -29,25 +32,21 @@ const Home: NextPage = () => {
     )
   }
 
-  if (data.user.role == 'ADMIN') {
+  if (data.user?.role == 'ADMIN') {
     return (
       <LayoutComponent>
           <Text>Admin</Text>
       </LayoutComponent>
     )
   }
-  if (data.user.role == 'MONITOR') {
+  if (data.user?.role == 'MONITOR') {
     return (
       <MonitorComponent />
     )
   }
-  if (data.user.role == 'USER') {
+  if (data.user?.role == 'USER') {
     return (
-      <LayoutComponent>
-        <Center minH={'100vh'} bg={'gray.300'}>
-          <IconButton aria-label='Emergência' icon={<MdPolicy size={256} />} shadow={'md'} rounded={'lg'} m={2} h={'sm'} w={'full'} colorScheme="blue" />      
-        </Center>
-      </LayoutComponent>
+      <UserComponent />
     )
   }
   

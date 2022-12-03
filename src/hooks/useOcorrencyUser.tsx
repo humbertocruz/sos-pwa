@@ -2,24 +2,27 @@ import { useRecoilState } from "recoil"
 import useSWR from "swr"
 import { tokenAtom } from "../state/atoms"
 
-const useUser = () => {
+const useOcorrency = () => {
   const [token,setToken] = useRecoilState(tokenAtom)
 
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${token}`)
   const fetcher = (url:string) => fetch(url,{
+    method:'GET',
     headers:headers
   }).then((r) => r.json())
 
   // valida o usuario a cada 10 segundos
-  const { data, error, isValidating } = useSWR(token?'/api/user':null, fetcher, {
-    refreshInterval: 30000
-  })
-  if (!data && !isValidating) setToken(null)
+  const { data, error, isValidating, mutate } = 
+    useSWR(token?'/api/ocorrency/user':null, fetcher,{
+      refreshInterval: 10000
+    })
   return {
     data,
-    error
+    error,
+    isValidating,
+    mutate
   }
 }
-export default useUser
+export default useOcorrency

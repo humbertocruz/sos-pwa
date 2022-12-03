@@ -15,7 +15,6 @@ const MonitorComponent = () => {
   const [loading, setLoading] = useState('')
 
   const isLoading = (id:string) => {
-    console.log(loading,id)
     return loading === id
   }
 
