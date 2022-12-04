@@ -7,13 +7,15 @@ const UserComponent = (props:any) => {
 
   const {data,isValidating,mutate} = useUserOcorrency()
   
-  if (!data&&isValidating) {
+  if (!data) {
     return (
       <Text>Carregando...</Text>
     )
   }
+
+  console.log(data)
   
-  if (data.ocorrency==null) {
+  if (data.ocorrencies==null) {
     return (
       <UserHomeComponent mutate={mutate} />
     )

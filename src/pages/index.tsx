@@ -18,8 +18,6 @@ const Home: NextPage = () => {
     null
   )
 
-  if (!data.user) setToken(null)
-
   if (data.user?.role == 'SUPER_ADMIN') {
     return (
       <LayoutComponent>
