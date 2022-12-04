@@ -3,7 +3,8 @@ import LayoutComponent from '../components/layout/main'
 import dayjs from 'dayjs'
 
 const UserOcorrencyComponent = (props:any) => {
-  const { ocorrency } = props
+  const { data } = props
+  
   return (
     <LayoutComponent>
       <VStack minH={'100vh'} bg={'gray.300'}>
@@ -13,11 +14,11 @@ const UserOcorrencyComponent = (props:any) => {
         <SimpleGrid columns={2} gap={2}>
           <Center shadow={'md'} flexDirection={'column'} gap={2} rounded={'md'} p={2} bg={'gray.100'}>
             <Text fontWeight={'bold'} color={'gray.500'} textAlign={'center'}>Situação</Text>
-            <Badge p={2} colorScheme={'yellow'}>{ocorrency.ocorrencies.status}</Badge>
+            <Badge p={2} colorScheme={'yellow'}>{data.data.status}</Badge>
           </Center>
           <Center shadow={'md'} flexDirection={'column'} gap={2} rounded={'md'} p={2} bg={'gray.100'}>
             <Text fontWeight={'bold'} color={'gray.500'} textAlign={'center'}>Horário</Text>
-            <Badge p={2} colorScheme={'green'}>{dayjs(ocorrency.ocorrencies.date).format('HH:mm')}</Badge>
+            <Badge p={2} colorScheme={'green'}>{dayjs(data.data.date).format('HH:mm')}</Badge>
           </Center>
         </SimpleGrid>
       </Box>

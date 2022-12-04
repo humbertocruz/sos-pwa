@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Text, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, HStack, IconButton, Input, List, ListIcon, ListItem, useDisclosure } from "@chakra-ui/react"
-import useSWR from "swr"
 import { useRouter } from "next/router"
 import { useEffect, useRef } from "react"
 import { MdHome, MdLogin, MdLogout, MdMenu, MdPerson, MdPersonSearch, MdPolicy } from "react-icons/md"
@@ -8,11 +7,13 @@ import { useRecoilState } from "recoil"
 import { tokenAtom } from "../../state/atoms"
 import useUser from "../../hooks/useUser"
 
+
+
 const MenuComponent = () => {
   const [token,setToken] = useRecoilState(tokenAtom)
   const {isOpen, onOpen, onClose} = useDisclosure()
   const router = useRouter()
-  
+    
   const { data, error} = useUser()
 
   useEffect(() => {

@@ -37,11 +37,13 @@ const MonitorComponent = () => {
 
   if (!data) return null
 
+  console.log(data)
+
   return (
     <LayoutComponent>
       <Center minH={'100vh'} bg={'gray.300'}>
         <VStack gap={0} p={2} mt={'10vh'} mb={'5vh'}>
-        {data?.ocorrencies.map((item:any, i:number) => {
+        {data?.data.map((item:any, i:number) => {
           const isOpen = item.status==='ABERTO'
           const isRoll = item.status==='EM_ANDAMENTO'
           const isClose = item.status == 'FECHADO'

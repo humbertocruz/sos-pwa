@@ -12,16 +12,14 @@ const UserComponent = (props:any) => {
       <Text>Carregando...</Text>
     )
   }
-
-  console.log(data)
   
-  if (data.ocorrencies==null) {
+  if (data.data==null) {  
     return (
       <UserHomeComponent mutate={mutate} />
     )
   } else {
     return (
-      <UserOcorrencyComponent ocorrency={data} />
+      <UserOcorrencyComponent data={data} />
     )
   }
 

@@ -5,8 +5,7 @@ import Auth from '../_token'
 type Data = {
   success:boolean,
   error:string,
-  ocorrencies?: any,
-  ocorrency?: any,
+  data: any
 }
 
 export default async function handler(
@@ -21,7 +20,7 @@ export default async function handler(
     res.status(430).send({
       success:false,
       error:'Token invalid!',
-      ocorrencies:[]
+      data:[]
     })
   }
   let user = await getUser(token||'')
@@ -29,7 +28,7 @@ export default async function handler(
     res.status(430).send({
       success:false,
       error:'Token invalid!',
-      ocorrencies:[]
+      data:[]
     })
   }
   //@ts-ignore
@@ -59,7 +58,11 @@ export default async function handler(
         }
       })
       
-      res.status(200).json({ ocorrencies,success:true,error:'' })
+      res.status(200).json({ 
+        data:ocorrencies,
+        success:true,
+        error:'' 
+      })
       break
     case 'POST':
       const { latitude, longitude } = req.body
@@ -79,11 +82,17 @@ export default async function handler(
           }
         }
       })
-      res.status(200).json({ ocorrency,success:true,error:'' })
+      res.status(200).json({ 
+        data:ocorrency,
+        success:true,
+        error:'' 
+      })
+      break
     default:
       res.status(430).send({
         success:false,
-        error:'Method invalid!'
+        error:'Method invalid!',
+        data:[]
       })
       break
   }

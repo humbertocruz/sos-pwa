@@ -5,7 +5,7 @@ import Auth from '../_token'
 type Data = {
   success:boolean,
   error:string,
-  ocorrencies: any
+  data: any
 }
 
 export default async function handler(
@@ -20,7 +20,7 @@ export default async function handler(
     res.status(430).send({
       success:false,
       error:'Token invalid!',
-      ocorrencies:[]
+      data:[]
     })
   }
   let user = await getUser(token||'')
@@ -28,7 +28,7 @@ export default async function handler(
     res.status(430).send({
       success:false,
       error:'Token invalid!',
-      ocorrencies:[]
+      data:[]
     })
   }
   //@ts-ignore
@@ -36,7 +36,7 @@ export default async function handler(
 
   switch (method) {
     case 'GET':
-      const ocorrencies = await prisma?.ocorrency.findFirst({
+      const ocorrency = await prisma?.ocorrency.findFirst({
         where: {
           clientId: user?.clientId,
           userId: user?.id,
@@ -59,14 +59,14 @@ export default async function handler(
         }
       })
       
-      res.status(200).json({ ocorrencies,success:true,error:'' })
+      res.status(200).json({ data:ocorrency, success:true, error:'' })
       break
 
     default:
       res.status(430).send({
         success:false,
         error:'Method invalid!',
-        ocorrencies:[]
+        data:[]
       })
       break
   }
