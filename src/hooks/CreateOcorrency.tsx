@@ -5,7 +5,7 @@ import { tokenAtom } from "../state/atoms"
 
 const CreateOcorrency = () => {
   const [token,setToken] = useRecoilState(tokenAtom)
-  const [location,setLocation] = useState(null)
+  const [location,setLocation] = useState({latitude:0,longitude:0})
 
   // get location
   useEffect(() => {
@@ -16,7 +16,7 @@ const CreateOcorrency = () => {
       })
     },
     ()=>{
-      setLocation(null)
+      setLocation({latitude:0,longitude:0})
       console.log('erro')
     })
   },[])

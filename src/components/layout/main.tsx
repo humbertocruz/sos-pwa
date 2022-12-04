@@ -7,7 +7,7 @@ const LayoutComponent = (props:any) => {
   const { children, header=true, footer=true } = props
   return (
     <VStack w={'full'} minH={'100vh'} bg='red'>
-      <VStack pt={header?'7vh':null} minH={'100vh'} w={'full'} bg={'gray.300'}>
+      <VStack minH={'100vh'} w={'full'} bg={'gray.300'}>
         {header&&<MenuComponent />}
         {children}     
         {/*footer&&<FooterComponent />*/}

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Button, Container, Text, Box, Center, Flex, HStack, IconButton, Grid, GridItem, Divider, VStack, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import { MdArrowDropDown, MdPolicy } from 'react-icons/md'
@@ -13,8 +14,9 @@ import useClients from '../../hooks/useClients'
 //@ts-ignore
 const AdminsPage: NextPage = () => {
 
-  const [client, setClient] = useState(undefined)
+  const [clientX, setClientX] = useState(undefined)
   const { data:clients,error:clientsError, isValidating:clientsIsValidating, mutate:clientsMutate } = useClients()
+  //@ts-ignore
   const { data,error, isValidating, mutate } = useAdmins(client?.id)
   
   return (
@@ -22,12 +24,11 @@ const AdminsPage: NextPage = () => {
       <VStack px={2} minH={'85vh'} bg={'gray.300'} gap={2} p={2}>
         <HStack>
           <Menu>
-            <MenuButton rightIcon={<MdArrowDropDown size={20} />} size={'sm'} colorScheme={'blue'} 
-              as={Button}>{client?client?.name:'Cliente'}</MenuButton>
+            <MenuButton rightIcon={<MdArrowDropDown size={20} />} size={'sm'} colorScheme={'blue'} as={Button}>{clientX?clientX?.name:'Cliente'}</MenuButton>
             <MenuList>
               {clients&&clients.clients.map((client:any)=>{
                 return(
-                  <MenuItem onClick={()=>setClient(client)} key={client.id}>{client.name}</MenuItem>
+                  <MenuItem onClick={()=>setClientX(client)} key={client.id}>{client.name}</MenuItem>
                 )
               })}
             </MenuList>

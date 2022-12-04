@@ -31,7 +31,7 @@ const MenuComponent = () => {
 
   return (
     <Center zIndex={2} w={'full'} position={'fixed'} top={0} justifyContent={'flex-start'} h={'7vh'} bg={'gray.500'} shadow={'md'} p={2}>
-      <Drawer isOpen onClose={onClose} isOpen={isOpen} placement={'left'}>
+      <Drawer onClose={onClose} isOpen={isOpen} placement={'left'}>
         <DrawerOverlay />
         <DrawerContent bg={'gray.600'}>
           <DrawerCloseButton color={'white'} />
@@ -65,7 +65,7 @@ const MenuComponent = () => {
       <HStack w={'full'} justifyContent={'space-between'}>
         <IconButton onClick={onOpen} colorScheme={'whiteAlpha'} variant={'ghost'} aria-label="Emergência" icon={<MdMenu size={24} />} />
         <Text color={'whiteAlpha.800'} fontWeight='bold' fontSize={18}>SOS Cidadão</Text>
-        <IconButton onClick={logout} colorScheme={'whiteAlpha'} variant={'ghost'} aria-label="Emergência" icon={<MdLogout size={24} />} />}
+        <IconButton onClick={logout} colorScheme={'whiteAlpha'} variant={'ghost'} aria-label="Emergência" icon={<MdLogout size={24} />} />
       </HStack>
     </Center>
   )

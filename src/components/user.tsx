@@ -13,7 +13,7 @@ const UserComponent = (props:any) => {
     )
   }
   
-  if (data.ocorrencies==null) {
+  if (data.ocorrency==null) {
     return (
       <UserHomeComponent mutate={mutate} />
     )

@@ -53,7 +53,7 @@ const Login: NextPage = () => {
             <Text fontWeight={'bold'} color={'blackAlpha.500'} fontSize={'md'}>SOS CIDADÃO</Text>
           </VStack>
         </Center>
-        <Center w={'full'} bg={'gray.100'} p={4} rounded={'md'} shadow={'md'}>
+        <Center w={'md'} bg={'gray.100'} p={4} rounded={'md'} shadow={'md'}>
           <VStack w={'full'}>
             <Input readOnly={isLoading} type={'email'} value={email} onChange={(e)=>setEmail(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite seu Email" />
             <Input readOnly={isLoading} type={'password'} value={password} onChange={(e)=>setPassword(e.currentTarget.value)} my={2} variant={'flushed'} placeholder="Digite sua Senha" />
