@@ -22,6 +22,7 @@ export default async function handler(
       error:'Token invalid!',
       data:[]
     })
+    return
   }
   let user = await getUser(token||'')
   if (!user) {
@@ -30,6 +31,7 @@ export default async function handler(
       error:'Token invalid!',
       data:[]
     })
+    return
   }
   //@ts-ignore
   if (user) delete user.password
